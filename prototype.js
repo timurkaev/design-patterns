@@ -1,51 +1,30 @@
-class BoardSquare {
-  constructor(color, row, file, startingPiece) {
-    this.color = color;
-    this.row = row;
-    this.file = file;
-  }
-
-  occupySquare() {
-    this.piece = null;
-  }
-
-  clearSquare() {
-    this.piece = null;
+class Game {
+  constructor(name, size, date) {
+    this.name = name;
+    this.size = size;
+    this.date = date;
   }
 }
 
-class BoardSquarePrototype {
+const game = new Game("battlefield 4", 64, 2014);
+
+class GamePrototype {
   constructor(prototype) {
     this.prototype = prototype;
   }
 
   clone() {
-    const boardSquare = new BoardSquare();
-    boardSquare.color = this.prototype.color;
-    boardSquare.row = this.prototype.row;
-    boardSquare.file = this.prototype.file;
-
-    return boardSquare;
+    return Object.assign(new Game(), this.prototype);
   }
 }
 
-const whiteSquare = new BoardSquare("white");
-const whiteSquarePrototype = new BoardSquarePrototype(whiteSquare);
+const gamePrototype = new GamePrototype(game);
+const clonedGame = gamePrototype.clone();
+clonedGame.name = "Red Dead Redemption 2";
+clonedGame.size = 32;
 
-const whiteSquareTwo = whiteSquarePrototype.clone();
-// three four five ...
-const whiteSquareLast = whiteSquarePrototype.clone();
+console.log(game.name);
+console.log(game.size);
 
-// Без class
-const square = {
-  color: "white",
-  occupySquare(piece) {
-    this.piece = piece;
-  },
-
-  clearSquare() {
-    this.piece = null;
-  },
-};
-
-const otherSquare = Object.create(square); // Прототип
+console.log(clonedGame.name);
+console.log(clonedGame.size);
