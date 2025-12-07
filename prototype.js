@@ -36,7 +36,16 @@ const whiteSquareTwo = whiteSquarePrototype.clone();
 // three four five ...
 const whiteSquareLast = whiteSquarePrototype.clone();
 
-console.log(
-  whiteSquare.color === whiteSquareTwo.color,
-  whiteSquareTwo.color === whiteSquareLast.color
-);
+// Без class
+const square = {
+  color: "white",
+  occupySquare(piece) {
+    this.piece = piece;
+  },
+
+  clearSquare() {
+    this.piece = null;
+  },
+};
+
+const otherSquare = Object.create(square); // Прототип
